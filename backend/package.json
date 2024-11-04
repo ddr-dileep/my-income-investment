@@ -1,0 +1,36 @@
+{
+  "name": "my-income-investment",
+  "version": "1.0.0",
+  "description": "Investment income is money received in interest payments, dividends, capital gains realized with the sale of stock or other assets, and any profit made through another investment type.",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.ts",
+    "start": "node src/server.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddr-dileep/my-income-investment.git"
+  },
+  "keywords": [
+    "Dileep",
+    "raloti",
+    "ddr-dileep"
+  ],
+  "author": "Dileep raloti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ddr-dileep/my-income-investment/issues"
+  },
+  "homepage": "https://github.com/ddr-dileep/my-income-investment#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
