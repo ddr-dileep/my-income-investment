@@ -9,6 +9,7 @@ export default function Home() {
   useEffect(() => {
     if (!isAuth) {
       router.push("/login");
+      setIsAuth(true);
     }
   }, []);
 
