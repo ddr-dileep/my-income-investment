@@ -8,7 +8,7 @@ const apiResponse = {
   },
 
   ERROR: (error: any) => {
-    let statusCode = 500;
+    let statusCode = 400;
     let errorMessage = "Something went wrong";
     let details = null;
 
@@ -25,7 +25,6 @@ const apiResponse = {
 
     // Check for MongoDB duplicate key error
     if (error.code === 11000) {
-      statusCode = 409;
       const field = Object.keys(error.keyValue)[0];
       errorMessage = `Duplicate entry for ${field}: '${error.keyValue[field]}'`;
       details = { field, value: error.keyValue[field] };
