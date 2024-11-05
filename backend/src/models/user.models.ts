@@ -19,8 +19,6 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
     select: false,
-    match:
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   },
   updateHistory: [
     {
