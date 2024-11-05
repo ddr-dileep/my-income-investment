@@ -1,35 +1,38 @@
 .auth-page {
-  background: url("/images/background/bg.webp");
+  // background: url("/images/background/bg.webp");
+  background: linear-gradient(
+      rgba(242, 241, 241, 0.3),
+      rgba(106, 17, 109, 0.875)
+    ),
+    url("/images/background/bg.webp");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 
-  ::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(244, 201, 201, 0.197) 0%,
-      rgba(2, 18, 83, 0.615) 100%
-    );
-    z-index: -1;
+  &-footer {
+    font-weight: 600;
+    text-align: left;
+    width: 30%;
+    padding: 10px 28px 20px;
+    color: #540246;
+    background-color: #fafafa;
+    border-radius: 0% 0% 12px 12px;
   }
 
   .login-page,
   .register-page {
-    background: rgb(255, 255, 255);
     padding: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 12px 12px 0% 0%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #fafafa;
     width: 30%;
     max-width: 100%;
-    z-index: 9 !important;
     margin-top: 45px;
   }
 }
