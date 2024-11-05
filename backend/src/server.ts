@@ -1,9 +1,12 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+const APP_PORT = process.env.APP_PORT || 8000;
 
 const app = express();
 
 app.use(express.json());
 
-app.listen("8080", () => {
-  console.log("Server is running on port 8080");
+app.listen(APP_PORT, () => {
+  console.log(`Server is running on port http://localhost:${APP_PORT}`);
 });
