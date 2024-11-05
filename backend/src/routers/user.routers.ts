@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { userController } from "../controllers/user.controller";
 import { userMiddleware } from "../middlewares/user.middlewares";
+import { verifyTokenMiddleware } from "../utils/token";
 
 const userRouter = Router();
 
@@ -15,5 +16,12 @@ userRouter.post(
   userMiddleware.loginUser,
   userController.loginUser
 );
+
+userRouter.get(
+  "/info",
+  verifyTokenMiddleware,
+  userController.getUserInfo
+);
+
 
 export default userRouter;
