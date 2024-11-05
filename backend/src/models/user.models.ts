@@ -19,6 +19,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+  isAccountDeleted: {
+    type: Boolean,
+    default: false,
+    select: false,
+  },
   updateHistory: [
     {
       type: String,

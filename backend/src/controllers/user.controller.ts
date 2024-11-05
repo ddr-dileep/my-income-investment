@@ -63,6 +63,7 @@ export const userController = {
           .status(404)
           .json(apiResponse.ERROR({ message: "User not found" }));
       }
+
       res
         .status(200)
         .json(
@@ -72,4 +73,67 @@ export const userController = {
       res.status(500).json(apiResponse.ERROR(error));
     }
   },
+
+  updateUserInfo: async (req: Request | any, res: Response): Promise<any> => {
+    try {
+      const user = await User.findById(req.user.id);
+      if (!user || user.isAccountDeleted) {
+        return res.status(404).json(
+          apiResponse.ERROR({
+            message: "User not found or account is deleted",
+          })
+        );
+      }
+
+      req.body.password = user.password;
+
+      const updatedUser = await User.findByIdAndUpdate(user._id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+
+      if (!updatedUser) {
+        return res
+          .status(400)
+          .json(apiResponse.ERROR({ message: "Invalid request" }));
+      }
+
+      res.status(200).json(
+        apiResponse.SUCCESS({
+          user: updatedUser,
+          message: "User info updated successfully",
+        })
+      );
+    } catch (error) {
+      res.status(500).json(apiResponse.ERROR(error));
+    }
+  },
+
+  // updateUserInfo: async (req: Request | any, res: Response): Promise<any> => {
+  //   try {
+  //     const user = await User.findById(req.user.id);
+  //     if (!user) {
+  //       return res.status(404).json(
+  //         apiResponse.ERROR({
+  //           message: "User not found or account is deleted",
+  //         })
+  //       );
+  //     }
+
+  //     user.isAccountDeleted = true;
+
+  //     await user.save();
+
+  //     res
+  //       .status(200)
+  //       .json(
+  //         apiResponse.SUCCESS({
+  //           user,
+  //           message: "User info updated successfully",
+  //         })
+  //       );
+  //   } catch (error) {
+  //     res.status(500).json(apiResponse.ERROR(error));
+  //   }
+  // },
 };

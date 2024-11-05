@@ -23,5 +23,11 @@ userRouter.get(
   userController.getUserInfo
 );
 
+userRouter.patch(
+  "/update",
+  verifyTokenMiddleware,
+  userController.updateUserInfo
+);
+
 
 export default userRouter;
