@@ -12,7 +12,7 @@ const apiResponse = {
     let errorMessage = data?.message || "Something went wrong";
 
     if (data?.code === 11000) {
-      const key = Object.keys(data?.keyValue)[0]; // Get the field causing the duplicate
+      const key = Object.keys(data?.keyValue)[0];
       errorMessage = `Duplicate entry for ${key}: ${data.keyValue[key]}`;
       data = {};
     }
