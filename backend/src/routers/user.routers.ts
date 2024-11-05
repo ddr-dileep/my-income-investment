@@ -29,5 +29,11 @@ userRouter.patch(
   userController.updateUserInfo
 );
 
+userRouter.delete(
+  "/delete",
+  verifyTokenMiddleware,
+  userController.deleteUserInfo
+);
+
 
 export default userRouter;

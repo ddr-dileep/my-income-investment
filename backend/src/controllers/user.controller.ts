@@ -109,31 +109,29 @@ export const userController = {
     }
   },
 
-  // updateUserInfo: async (req: Request | any, res: Response): Promise<any> => {
-  //   try {
-  //     const user = await User.findById(req.user.id);
-  //     if (!user) {
-  //       return res.status(404).json(
-  //         apiResponse.ERROR({
-  //           message: "User not found or account is deleted",
-  //         })
-  //       );
-  //     }
+  deleteUserInfo: async (req: Request | any, res: Response): Promise<any> => {
+    try {
+      const user = await User.findById(req.user.id);
+      if (!user || user.isAccountDeleted) {
+        return res.status(404).json(
+          apiResponse.ERROR({
+            message: "User not found or account is deleted",
+          })
+        );
+      }
 
-  //     user.isAccountDeleted = true;
+      user.isAccountDeleted = true;
 
-  //     await user.save();
+      await user.save();
 
-  //     res
-  //       .status(200)
-  //       .json(
-  //         apiResponse.SUCCESS({
-  //           user,
-  //           message: "User info updated successfully",
-  //         })
-  //       );
-  //   } catch (error) {
-  //     res.status(500).json(apiResponse.ERROR(error));
-  //   }
-  // },
+      res.status(200).json(
+        apiResponse.SUCCESS({
+          user,
+          message: "User info deleted successfully",
+        })
+      );
+    } catch (error) {
+      res.status(500).json(apiResponse.ERROR(error));
+    }
+  },
 };
