@@ -1,24 +1,28 @@
+import { ChangeEvent } from "react";
+
+interface InputProps {
+  name: string;
+  type?: string;
+  placeholder?: string;
+  value?: string | number;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  error?: boolean;
+  errorText?: string;
+  className?: string;
+}
+
 export default function Input({
   placeholder,
-  type,
+  type = "text",
   name,
   label,
-  value,
-  onChange,
-  className,
   error = false,
   errorText = "",
-}: {
-  placeholder: string;
-  type: string;
-  value: string | undefined | number;
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
-  className?: string;
-  error?: string | undefined | boolean;
-  errorText?: string;
-  label?: string;
-  name: string;
-}) {
+  className = "",
+  value,
+  onChange,
+}: InputProps) {
   return (
     <div className={`app-input mb-3 ${error && "border-red-800"}`}>
       <label htmlFor={name} className="text-sm font-semibold">

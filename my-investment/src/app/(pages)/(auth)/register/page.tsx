@@ -4,7 +4,7 @@ import Heading from "@/components/Heading";
 import { registerFields } from "@/utils/constants";
 
 export default function RegisterPage() {
-  const onSubmit = (formValues: any) => {
+  const onSubmit = (formValues: object) => {
     console.log("object is submitted", formValues);
   };
   return (
