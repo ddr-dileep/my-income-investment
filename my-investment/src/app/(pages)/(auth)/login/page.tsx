@@ -1,18 +1,20 @@
+"use client";
+import Form from "@/components/Form";
+import Heading from "@/components/Heading";
+import { loginFields } from "@/utils/constants";
+
 export default function Login() {
+  const onSubmit = (formValues: any) => {
+    console.log("object is submitted", formValues);
+  };
   return (
     <div className="login-page">
-      <h1>Login</h1>
-      {/* <form>
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        Password
-        <input type="password" name="password" required />
-      </label>
-      <button type="submit">Login</button>
-    </form> */}
+      <Heading
+        title="Welcome back"
+        subtitle="fill below form and login"
+        className="text-center"
+      />
+      <Form fields={loginFields} onSubmit={onSubmit} />
     </div>
   );
 }
