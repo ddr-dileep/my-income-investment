@@ -8,6 +8,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+})
+
 app.listen(APP_PORT, () => {
   console.log(`Server is running on port http://localhost:${APP_PORT}`);
   dbConnection();
