@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import User from "../models/user.models";
 import apiResponse from "../utils/api.response";
-import { hashPassword } from "../utils/bcrypt";
+import { comparePasswords, hashPassword } from "../utils/bcrypt";
+import { generateToken } from "../utils/token";
 
 export const userController = {
   registerUser: async (req: Request, res: Response) => {
@@ -28,9 +29,27 @@ export const userController = {
           .json(apiResponse.ERROR({ message: "Invalid credentials" }));
       }
 
-      res
-        .status(201)
-        .json({ existingUser, message: "User logged in successfully" });
+      const isPasswordValid = await comparePasswords(
+        req.body.password,
+        existingUser.password
+      );
+
+      if (!isPasswordValid) {
+        return res
+          .status(401)
+          .json(apiResponse.ERROR({ message: "Invalid credentials" }));
+      }
+
+      const token = generateToken({
+        id: existingUser._id,
+        email: existingUser.email,
+        name: existingUser.name,
+      });
+
+      res.status(201).json({
+        token,
+        message: "User logged in successfully",
+      });
     } catch (error) {
       res.status(400).json(apiResponse.ERROR(error));
     }
