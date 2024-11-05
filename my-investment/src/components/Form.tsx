@@ -25,14 +25,24 @@ export default function Form({
             <Input {...field} key={field?.name} onChange={onInputChange} />
           );
         })}
-      {onCancel && (
-        <button type="reset" onClick={onCancel}>
-          Cancel
+
+      {onSubmit && (
+        <button
+          type="submit"
+          className="mt-2 bg-sky-700 text-white w-full p-2 rounded-full"
+          onClick={() => onSubmit(formValues)}
+        >
+          Submit
         </button>
       )}
-      {onSubmit && (
-        <button type="submit" onClick={() => onSubmit(formValues)}>
-          Submit
+
+      {onCancel && (
+        <button
+          type="reset"
+          className="mt-2 bg-red-700 text-white w-full p-2 rounded-full"
+          onClick={onCancel}
+        >
+          Cancel
         </button>
       )}
     </div>
