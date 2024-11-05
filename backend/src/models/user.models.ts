@@ -22,7 +22,6 @@ const userSchema = new Schema({
   isAccountDeleted: {
     type: Boolean,
     default: false,
-    select: false,
   },
   updateHistory: [
     {

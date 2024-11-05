@@ -57,8 +57,8 @@ export const userController = {
 
   getUserInfo: async (req: Request | any, res: Response): Promise<any> => {
     try {
-      const user = await User.findById(req.user.id).select("-password -__v");
-      if (!user) {
+      const existingUser = await User.findById(req.user.id);
+      if (!existingUser || existingUser?.isAccountDeleted) {
         return res
           .status(404)
           .json(apiResponse.ERROR({ message: "User not found" }));
@@ -67,7 +67,7 @@ export const userController = {
       res
         .status(200)
         .json(
-          apiResponse.SUCCESS({ user, message: "User info found successfully" })
+          apiResponse.SUCCESS({ user :existingUser, message: "User info found successfully" })
         );
     } catch (error) {
       res.status(500).json(apiResponse.ERROR(error));
