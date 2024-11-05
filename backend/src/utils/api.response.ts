@@ -1,39 +1,27 @@
 const apiResponse = {
   SUCCESS: (data: any) => {
     return {
+      data: { ...data, message: undefined },
       success: true,
-      data,
+      error: false,
       message: data?.message || "Success",
     };
   },
 
-  ERROR: (error: any) => {
-    let statusCode = 400;
-    let errorMessage = "Something went wrong";
-    let details = null;
+  ERROR: (data: any) => {
+    let errorMessage = data?.message || "Something went wrong";
 
-    // Check for Mongoose validation error
-    if (error.name === "ValidationError") {
-      statusCode = 400;
-      errorMessage = "Validation failed";
-      details = Object.keys(error.errors).map((field) => ({
-        field,
-        message: error.errors[field].message,
-        kind: error.errors[field].kind,
-      }));
-    }
-
-    // Check for MongoDB duplicate key error
-    if (error.code === 11000) {
-      const field = Object.keys(error.keyValue)[0];
-      errorMessage = `Duplicate entry for ${field}: '${error.keyValue[field]}'`;
-      details = { field, value: error.keyValue[field] };
+    if (data?.code === 11000) {
+      const key = Object.keys(data?.keyValue)[0]; // Get the field causing the duplicate
+      errorMessage = `Duplicate entry for ${key}: ${data.keyValue[key]}`;
+      data = {};
     }
 
     return {
       success: false,
-      statusCode,
-      error: { message: errorMessage, details },
+      error: true,
+      message: errorMessage,
+      errors: { ...data, message: undefined },
     };
   },
 };
