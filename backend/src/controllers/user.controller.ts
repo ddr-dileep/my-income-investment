@@ -17,4 +17,22 @@ export const userController = {
       res.status(400).json(apiResponse.ERROR(error));
     }
   },
+
+  loginUser: async (req: Request, res: Response): Promise<any> => {
+    try {
+      const existingUser = await User.findOne({ email: req.body.email });
+
+      if (!existingUser) {
+        return res
+          .status(401)
+          .json(apiResponse.ERROR({ message: "Invalid credentials" }));
+      }
+
+      res
+        .status(201)
+        .json({ existingUser, message: "User logged in successfully" });
+    } catch (error) {
+      res.status(400).json(apiResponse.ERROR(error));
+    }
+  },
 };
