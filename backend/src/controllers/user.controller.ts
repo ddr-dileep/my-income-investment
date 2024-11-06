@@ -59,7 +59,7 @@ export const userController = {
 
   getUserInfo: async (req: Request | any, res: Response): Promise<any> => {
     try {
-      const existingUser = await User.findById(req.user.id);
+      const existingUser = await User.findById(req.user.id).select("-password -__v");
       if (!existingUser || existingUser?.isAccountDeleted) {
         return res
           .status(404)
