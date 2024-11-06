@@ -18,4 +18,13 @@ export const authAPI = {
       throw error;
     }
   },
+
+  userInfo: async () => {
+    try {
+      const resp = await apiClient.get("/user/info");
+      return resp?.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
