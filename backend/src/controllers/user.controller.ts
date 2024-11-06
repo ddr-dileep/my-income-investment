@@ -46,10 +46,12 @@ export const userController = {
         name: existingUser.name,
       });
 
-      res.status(201).json({
-        token,
-        message: "User logged in successfully",
-      });
+      res.status(200).json(
+        apiResponse.SUCCESS({
+          token,
+          message: "User logged in successfully",
+        })
+      );
     } catch (error) {
       res.status(400).json(apiResponse.ERROR(error));
     }
@@ -67,7 +69,10 @@ export const userController = {
       res
         .status(200)
         .json(
-          apiResponse.SUCCESS({ user :existingUser, message: "User info found successfully" })
+          apiResponse.SUCCESS({
+            user: existingUser,
+            message: "User info found successfully",
+          })
         );
     } catch (error) {
       res.status(500).json(apiResponse.ERROR(error));
