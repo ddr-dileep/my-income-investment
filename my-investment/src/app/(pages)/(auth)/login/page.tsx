@@ -25,6 +25,7 @@ export default function Login() {
         alert(response.message);
       }
     } catch (err) {
+      console.log(err)
       setError("Failed to log in. Please check your credentials."); // Custom error message
     } finally {
       setLoading(false);
