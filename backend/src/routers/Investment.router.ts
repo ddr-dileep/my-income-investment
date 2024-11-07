@@ -12,4 +12,10 @@ investmentRouter.post(
   investmentController.addInvestment
 );
 
+investmentRouter.get(
+  "/get-all",
+  verifyTokenMiddleware,
+  investmentController.getAllInvestments
+);
+
 export default investmentRouter;

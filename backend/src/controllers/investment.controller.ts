@@ -26,4 +26,20 @@ export const investmentController = {
       res.status(400).json(apiResponse.ERROR(error));
     }
   },
+
+  getAllInvestments: async (
+    req: Request | any,
+    res: Response
+  ): Promise<any> => {
+    try {
+      const investments = await Investment.find({ createdBy: req.user.id });
+      res.json({
+        count: investments.length,
+        investments,
+        message: "Investments found successfully",
+      });
+    } catch (error) {
+      res.status(500).json(apiResponse.ERROR(error));
+    }
+  },
 };
